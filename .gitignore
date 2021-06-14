@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+
+Nava_v1_028beta/inols-clangd-err.log
+Nava_v1_028beta/inols-clangd.log
+Nava_v1_028beta/inols-err.log
+Nava_v1_028beta/inols.log
