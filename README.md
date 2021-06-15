@@ -1,6 +1,7 @@
 # Nava 909 alternative firmware
 
-Based on the 1.028b firmware by e-licktronics. This branch contains the source code of the original firmware. If you want to check out the additional features, switch to the `features` branch!
+Based on the 1.028b firmware by e-licktronics. This branch contains the following additional features:
+* Allow step editing when the sequencer is not running
 
 ## Setup the development environment
 
