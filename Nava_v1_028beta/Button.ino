@@ -227,25 +227,50 @@ void MuteButtonGet()
   muteButtons = (dinSr[1] << 8) | dinSr[0];
 
   if (muteButtons != lastMuteButtons) {                                                     // [1.028] runs only when a button is pressed (important for expander mode)
-    
-    for (byte a = 0; a < NBR_STEP_BTN; a++) {
-      
-      if (((muteButtons >> a) & 1U) && !((lastMuteButtons >> a) & 1U)) {
-              
-        muteInst ^= (1 << muteOut[a]);
-        muteLeds ^= muteLedsOrder[a];
+    // If shift is held down, solo the selected instrument
+    if (shiftBtn) {
+      for (byte a = 0; a < NBR_STEP_BTN; a++) {
         
-        if (seq.muteModeHH) {                                        
-          if (a == 12) {
-            muteInst ^= (1 << muteOut[13]);
-            muteLeds ^= muteLedsOrder[13];
+        if (((muteButtons >> a) & 1U) && !((lastMuteButtons >> a) & 1U)) {
+          muteInst &= ~(1 << muteOut[a]);
+          for (byte b = 0; b < NBR_STEP_BTN; b++) {
+            if (muteOut[a] != muteOut[b]) {
+              muteInst |= (1 << muteOut[b]);
+            }
           }
-          else if (a == 13) {
-            muteInst ^= (1 << muteOut[12]);
-            muteLeds ^= muteLedsOrder[12];
-          }
+          muteLeds = ~muteLedsOrder[a];
+          
+          if (seq.muteModeHH) {                                        
+            if (a == 12) {
+              muteInst &= ~(1 << muteOut[13]);
+              muteLeds &= ~muteLedsOrder[13];
+            }
+            else if (a == 13) {
+              muteInst &= ~(1 << muteOut[12]);
+              muteLeds &= ~muteLedsOrder[12];
+            }
+          }      
         }      
-      }      
+      }
+    } else {
+      for (byte a = 0; a < NBR_STEP_BTN; a++) {
+        
+        if (((muteButtons >> a) & 1U) && !((lastMuteButtons >> a) & 1U)) {
+          muteInst ^= (1 << muteOut[a]);
+          muteLeds ^= muteLedsOrder[a];
+          
+          if (seq.muteModeHH) {                                        
+            if (a == 12) {
+              muteInst ^= (1 << muteOut[13]);
+              muteLeds ^= muteLedsOrder[13];
+            }
+            else if (a == 13) {
+              muteInst ^= (1 << muteOut[12]);
+              muteLeds ^= muteLedsOrder[12];
+            }
+          }      
+        }      
+      }
     }
   }
 }

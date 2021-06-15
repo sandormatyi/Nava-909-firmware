@@ -2,6 +2,7 @@
 
 Based on the 1.028b firmware by e-licktronics. This branch contains the following additional features:
 * Allow step editing when the sequencer is not running
+* Shift+step in mute mode solos the instrument (shift+encoder mutes all)
 
 ## Setup the development environment
 
