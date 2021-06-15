@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+build/
 
 Nava_v1_028beta/inols-clangd-err.log
 Nava_v1_028beta/inols-clangd.log
