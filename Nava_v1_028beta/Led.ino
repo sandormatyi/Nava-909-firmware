@@ -178,7 +178,7 @@ void SetLeds()
       }
       
     }
-    else if(isRunning && !instBtn){
+    else {
       stepLedsHigh = stepLedsLow = 0;//initialize step Leds variable 
       for (int stp = 0; stp < NBR_STEP; stp++){
         if (curFlam) {                                                                       // [zabox] [1.027] flam
@@ -210,22 +210,6 @@ void SetLeds()
       else{
         stepLeds = stepLedsHigh ^ blinkFast << curStep;//B1010101010101010;
         flagLedIntensity++;
-      }
-    }
-    else if (!isRunning && !instBtn){
-      //Display Bank number
-      if (bankBtn.pressed){
-        stepLeds = 1 << curBank;
-      }
-      //display selected pattern
-      else{
-        // if (group.length)
-        temp = 0;
-       // Serial.println(group.length);
-        for (int a = 0; a <= group.length; a++){
-          bitSet(temp,(group.firstPattern % NBR_PATTERN) + a);
-        }
-        stepLeds = temp & ~(!blinkTempo << (curPattern % NBR_PATTERN));
       }
     }
     break;
